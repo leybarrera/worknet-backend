@@ -1,0 +1,69 @@
+Roles
+  id
+  name
+  description
+
+
+Usuarios
+  id
+  name
+  surname
+  email
+  phone
+  age
+  username
+  password
+  dni
+  rol_id
+
+Candidatos
+  id
+  usuario_id
+  currículum
+  abilities
+  preferences
+
+
+Empresas
+  id
+  name
+  phone
+  sector
+  description
+  address
+
+
+Empleadores
+  id
+  usuario_id
+  empresa_id
+
+
+Ofertas
+  id
+  empleador_id
+  job_title
+  description
+  requisites
+  date
+
+
+Aplicaciones
+  id
+  candidato_id
+  oferta_id
+  date
+  status (Pendiente, Aprobado, Rechazado)
+
+
+FAQS
+  id
+  question
+  request 
+  category (Registro, Empleo, Soporte)
+
+
+
+
+
+
