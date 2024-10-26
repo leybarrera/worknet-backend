@@ -1,6 +1,12 @@
 import 'dotenv/config'
 
-const { PORT = 3000, NODE_ENV = 'development', DB_DEV, DB_PROD } = process.env
+const {
+  PORT = 3000,
+  NODE_ENV = 'development',
+  DB_DEV,
+  DB_PROD,
+  SECRET_WORD,
+} = process.env
 
 const CONNECTION = {
   URI: NODE_ENV === 'production' ? DB_PROD : DB_DEV,
@@ -23,4 +29,4 @@ const CONNECTION = {
         },
 }
 
-export { PORT, NODE_ENV, CONNECTION }
+export { PORT, NODE_ENV, CONNECTION, SECRET_WORD }
