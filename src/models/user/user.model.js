@@ -60,6 +60,12 @@ const UserModel = (sequelize) => {
           len: [10, 10],
         },
       },
+
+      image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+
       RoleId: {
         type: DataTypes.UUID,
         allowNull: false,
@@ -67,6 +73,11 @@ const UserModel = (sequelize) => {
           model: 'Roles',
           key: 'id',
         },
+      },
+
+      isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
 
       isDeleted: {
