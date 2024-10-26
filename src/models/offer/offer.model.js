@@ -48,6 +48,15 @@ const OfferModel = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+
+      EmployerId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: {
+          model: 'Employers',
+          key: 'id',
+        },
+      },
     },
     {
       timestamps: false,

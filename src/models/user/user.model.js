@@ -60,7 +60,7 @@ const UserModel = (sequelize) => {
           len: [10, 10],
         },
       },
-      RolId: {
+      RoleId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {

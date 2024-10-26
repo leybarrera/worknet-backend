@@ -31,7 +31,7 @@ const ApplicantModel = (sequelize) => {
         },
       },
 
-      UsuarioId: {
+      UserId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {

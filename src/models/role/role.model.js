@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize'
 
-const RolModel = (sequelize) => {
+const RoleModel = (sequelize) => {
   sequelize.define(
-    'Rol',
+    'Role',
     {
       id: {
         type: DataTypes.UUID,
@@ -30,4 +30,4 @@ const RolModel = (sequelize) => {
   )
 }
 
-export default RolModel
+export default RoleModel
