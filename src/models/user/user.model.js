@@ -32,6 +32,7 @@ const UserModel = (sequelize) => {
           len: [8, 255],
         },
       },
+
       profile_picture: {
         type: DataTypes.STRING,
         allowNull: false,
