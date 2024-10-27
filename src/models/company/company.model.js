@@ -46,6 +46,11 @@ const CompanyModel = (sequelize) => {
           key: 'id',
         },
       },
+
+      isDeleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       timestamps: false,
