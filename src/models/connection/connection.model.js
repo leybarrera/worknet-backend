@@ -29,7 +29,7 @@ const ConnectionModel = (sequelize) => {
 
       status: {
         type: DataTypes.ENUM,
-        values: ['Pendiente', 'Aceptada', 'Rechazada'],
+        values: ['Pendiente', 'Aceptada'],
         defaultValue: 'Pendiente',
       },
 
