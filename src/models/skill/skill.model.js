@@ -14,6 +14,11 @@ const SkillModel = (sequelize) => {
         allowNull: false,
         unique: true,
       },
+
+      isDeleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       timestamps: false,
