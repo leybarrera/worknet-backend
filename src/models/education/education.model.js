@@ -1,43 +1,31 @@
 import { DataTypes } from 'sequelize'
 
-const CompanyModel = (sequelize) => {
+const EducationModel = (sequelize) => {
   sequelize.define(
-    'Company',
+    'Education',
     {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      industry: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      location: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
 
-      website_url: {
-        type: DataTypes.STRING,
-      },
-      contact_email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          isEmail: true,
-        },
-      },
-      contact_phone: {
+      institution: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-
+      degree_obtained: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      start_date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      end_date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
       UserId: {
         type: DataTypes.UUID,
         allowNull: false,
@@ -47,10 +35,8 @@ const CompanyModel = (sequelize) => {
         },
       },
     },
-    {
-      timestamps: false,
-    }
+    { timestamps: false }
   )
 }
 
-export default CompanyModel
+export default EducationModel

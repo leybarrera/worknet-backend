@@ -1,69 +1,166 @@
-Roles
-  id
-  name
-  description
+Funcionalidades que la base de datos debe soportar:
+Usuarios (candidatos y empresas) con perfiles profesionales.
+IA para analizar perfiles y emparejar candidatos con ofertas laborales.
+Comandos de voz y chatbot para interactuar con el sistema.
+Oportunidades laborales que las empresas pueden publicar.
+Aplicaciones a empleos que los candidatos pueden realizar.
+Mensajes entre usuarios (candidatos y empresas).
+Recomendaciones y conexiones laborales entre usuarios.
+Base de Datos para el Sistema de Gestión de Empleo con IA y Chatbot
+sql
+Copiar código
+-- Tabla para almacenar los usuarios (candidatos y empresas)
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(50) CHECK (role IN ('candidate', 'company', 'admin')) NOT NULL,
+    profile_picture VARCHAR(255),
+    professional_summary TEXT,
+    location VARCHAR(100),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
+-- Tabla para almacenar las experiencias laborales de los candidatos
+CREATE TABLE work_experience (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id),
+    job_title VARCHAR(100) NOT NULL,
+    company_name VARCHAR(100) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE,
+    description TEXT,
+    currently_employed BOOLEAN DEFAULT FALSE
+);
 
-Usuarios
-  id
-  name
-  surname
-  email
-  phone
-  age
-  username
-  password
-  dni
-  rol_id
+-- Tabla para almacenar la educación de los candidatos
+CREATE TABLE education (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id),
+    institution_name VARCHAR(100) NOT NULL,
+    degree_obtained VARCHAR(100),
+    start_date DATE NOT NULL,
+    end_date DATE,
+    description TEXT
+);
 
-Candidatos
-  id
-  usuario_id
-  currículum
-  abilities
-  preferences
+-- Tabla para almacenar las habilidades (skills) de los candidatos
+CREATE TABLE skills (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
 
+-- Relación entre usuarios y habilidades (skills)
+CREATE TABLE user_skills (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id),
+    skill_id INT REFERENCES skills(id),
+    proficiency_level VARCHAR(50) NOT NULL
+);
 
-Empresas
-  id
-  name
-  phone
-  sector
-  description
-  address
+-- Tabla para las certificaciones de los candidatos
+CREATE TABLE certifications (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id),
+    certificate_name VARCHAR(100) NOT NULL,
+    issuing_institution VARCHAR(100) NOT NULL,
+    obtained_date DATE NOT NULL
+);
 
+-- Tabla para almacenar las ofertas laborales que publican las empresas
+CREATE TABLE job_offers (
+    id SERIAL PRIMARY KEY,
+    company_id INT REFERENCES users(id),
+    title VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    location VARCHAR(100),
+    job_type VARCHAR(50), -- Full-time, Part-time, Freelance, etc.
+    salary DECIMAL(10, 2),
+    posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ai_recommendation BOOLEAN DEFAULT FALSE  -- Si la IA recomienda esta oferta a un usuario
+);
 
-Empleadores
-  id
-  usuario_id
-  empresa_id
+-- Tabla para almacenar las solicitudes de empleo (aplicaciones de los candidatos)
+CREATE TABLE job_applications (
+    id SERIAL PRIMARY KEY,
+    job_offer_id INT REFERENCES job_offers(id),
+    user_id INT REFERENCES users(id),
+    application_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(50) DEFAULT 'Pending'  -- Pending, Accepted, Rejected
+);
 
+-- Tabla para recomendaciones laborales entre usuarios
+CREATE TABLE recommendations (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id),
+    recommender_id INT REFERENCES users(id),
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-Ofertas
-  id
-  empleador_id
-  job_title
-  description
-  requisites
-  date
+-- Tabla para almacenar los mensajes enviados entre usuarios
+CREATE TABLE messages (
+    id SERIAL PRIMARY KEY,
+    sender_id INT REFERENCES users(id),
+    recipient_id INT REFERENCES users(id),
+    content TEXT NOT NULL,
+    sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    read BOOLEAN DEFAULT FALSE
+);
 
+-- Tabla para conexiones (amistades o contactos laborales) entre usuarios
+CREATE TABLE connections (
+    id SERIAL PRIMARY KEY,
+    user_source_id INT REFERENCES users(id),
+    user_target_id INT REFERENCES users(id),
+    status VARCHAR(50) DEFAULT 'Pending',  -- Pending, Accepted
+    request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    acceptance_date TIMESTAMP
+);
 
-Aplicaciones
-  id
-  candidato_id
-  oferta_id
-  date
-  status (Pendiente, Aprobado, Rechazado)
+-- Tabla para almacenar la interacción del chatbot (historial de mensajes y comandos de voz)
+CREATE TABLE chatbot_interactions (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id),
+    interaction_type VARCHAR(50), -- 'voice_command', 'text_message'
+    message TEXT,
+    response TEXT,
+    interaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
+-- Tabla para almacenar los resultados de las evaluaciones de IA (match entre usuarios y ofertas laborales)
+CREATE TABLE ai_evaluations (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id),
+    job_offer_id INT REFERENCES job_offers(id),
+    score DECIMAL(5, 2),  -- Puntaje de coincidencia calculado por IA
+    evaluation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+Descripción de las tablas:
+users: Esta tabla contiene los datos de los usuarios, ya sean candidatos o empresas. El campo role diferencia entre candidatos, empresas y administradores.
 
-FAQS
-  id
-  question
-  request 
-  category (Registro, Empleo, Soporte)
+work_experience, education, skills, certifications: Estas tablas almacenan la experiencia laboral, educación, habilidades y certificaciones de los candidatos.
 
+job_offers: Las empresas pueden crear ofertas de trabajo en esta tabla. El campo ai_recommendation indica si la IA ha recomendado la oferta a un candidato.
 
+job_applications: Aquí se registran las postulaciones de los candidatos a las ofertas de trabajo.
 
+recommendations: Las recomendaciones laborales entre usuarios se almacenan aquí.
 
+messages: Se utilizan para almacenar los mensajes privados entre usuarios (candidatos y empresas).
 
+connections: Para gestionar las solicitudes de conexión laboral o amistad entre los usuarios.
 
+chatbot_interactions: Esta tabla almacena las interacciones del chatbot con los usuarios, tanto por comandos de voz como por mensajes de texto.
+
+ai_evaluations: Almacena las evaluaciones de la IA, donde se registran los resultados del emparejamiento entre candidatos y oportunidades laborales. El puntaje de coincidencia (score) indica qué tan adecuado es el candidato para una oferta específica.
+
+Consideraciones adicionales:
+IA: Puedes agregar lógica para que la IA revise los perfiles de los candidatos, sus habilidades y experiencias, y compare esto con las descripciones de las ofertas de trabajo para generar recomendaciones almacenadas en la tabla ai_evaluations.
+Comandos de voz: La tabla chatbot_interactions puede ampliarse para capturar información de las interacciones mediante voz.
+Chatbot: El chatbot podrá responder a preguntas sobre el estado de las aplicaciones, sugerir trabajos basados en el perfil del usuario, o guiar el proceso de registro.
+Este esquema provee la base para un sistema robusto que incorpora IA, comandos de voz y chatbots, enfocado en la gestión laboral y conexión entre empresas y candidatos en la región de La Maná.

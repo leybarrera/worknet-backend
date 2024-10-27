@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize'
 
-const ApplicationModel = (sequelize) => {
+const ConnectionModel = (sequelize) => {
   sequelize.define(
-    'Application',
+    'Connection',
     {
       id: {
         type: DataTypes.UUID,
@@ -10,27 +10,21 @@ const ApplicationModel = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
       },
 
-      ApplicantId: {
+      UserSourceId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'Applicants',
+          model: 'Users',
           key: 'id',
         },
       },
-
-      OfferId: {
+      UserTargetId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'Offers',
+          model: 'Users',
           key: 'id',
         },
-      },
-
-      date: {
-        type: DataTypes.DATE,
-        allowNull: false,
       },
 
       status: {
@@ -39,15 +33,18 @@ const ApplicationModel = (sequelize) => {
         defaultValue: 'Pendiente',
       },
 
-      isDeleted: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+      request_date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+
+      acceptance_date: {
+        type: DataTypes.DATE,
+        allowNull: true,
       },
     },
-    {
-      timestamps: false,
-    }
+    { timestamps: false }
   )
 }
 
-export default ApplicationModel
+export default ConnectionModel

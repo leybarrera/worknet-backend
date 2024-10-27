@@ -1,41 +1,37 @@
 import { DataTypes } from 'sequelize'
 
-const CompanyModel = (sequelize) => {
+const WorkExperienceModel = (sequelize) => {
   sequelize.define(
-    'Company',
+    'WorkExperience',
     {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      industry: {
+      job_title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      location: {
+      company_name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-
-      website_url: {
-        type: DataTypes.STRING,
-      },
-      contact_email: {
-        type: DataTypes.STRING,
+      start_date: {
+        type: DataTypes.DATE,
         allowNull: false,
-        validate: {
-          isEmail: true,
-        },
       },
-      contact_phone: {
+      end_date: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      description: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+      },
+      currently_employed: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
 
       UserId: {
@@ -47,10 +43,8 @@ const CompanyModel = (sequelize) => {
         },
       },
     },
-    {
-      timestamps: false,
-    }
+    { timestamps: false }
   )
 }
 
-export default CompanyModel
+export default WorkExperienceModel

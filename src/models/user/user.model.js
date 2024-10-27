@@ -25,47 +25,32 @@ const UserModel = (sequelize) => {
           isEmail: true,
         },
       },
-      phone: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          len: [10, 10],
-        },
-      },
-      age: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          min: 18,
-        },
-      },
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
       password: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          len: [8, 16],
+          len: [8, 255],
         },
       },
-      dni: {
+      profile_picture: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
         validate: {
-          len: [10, 10],
+          isUrl: true,
         },
       },
-
-      image: {
+      location: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
-
+      isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      isDeleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
       RoleId: {
         type: DataTypes.UUID,
         allowNull: false,
@@ -74,20 +59,8 @@ const UserModel = (sequelize) => {
           key: 'id',
         },
       },
-
-      isActive: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
-
-      isDeleted: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
     },
-    {
-      timestamps: false,
-    }
+    { timestamps: false }
   )
 }
 

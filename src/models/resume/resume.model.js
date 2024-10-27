@@ -1,31 +1,27 @@
 import { DataTypes } from 'sequelize'
 
-const EmployerModel = (sequelize) => {
+const ResumeModel = (sequelize) => {
   sequelize.define(
-    'Employer',
+    'Resume',
     {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-
-      UsuarioId: {
-        type: DataTypes.UUID,
+      file_url: {
+        type: DataTypes.STRING,
         allowNull: false,
-
-        references: {
-          model: 'Users',
-          key: 'id',
+        validate: {
+          isUrl: true,
         },
       },
 
-      CompanyId: {
+      UserId: {
         type: DataTypes.UUID,
         allowNull: false,
-
         references: {
-          model: 'Companies',
+          model: 'Users',
           key: 'id',
         },
       },
@@ -34,4 +30,4 @@ const EmployerModel = (sequelize) => {
   )
 }
 
-export default EmployerModel
+export default ResumeModel

@@ -1,34 +1,25 @@
 import { DataTypes } from 'sequelize'
 
-const ApplicantModel = (sequelize) => {
+const CertificationModel = (sequelize) => {
   sequelize.define(
-    'Applicant',
+    'Certification',
     {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      resume: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          isUrl: true,
-        },
       },
-      skills: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+      issuing_institution: {
+        type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          min: 1,
-        },
       },
-      preferences: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+      obtained_date: {
+        type: DataTypes.DATE,
         allowNull: false,
-        validate: {
-          min: 1,
-        },
       },
 
       UserId: {
@@ -46,4 +37,4 @@ const ApplicantModel = (sequelize) => {
   )
 }
 
-export default ApplicantModel
+export default CertificationModel

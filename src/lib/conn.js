@@ -4,42 +4,90 @@ import { models } from '../models/index.models.js'
 
 const sequelize = new Sequelize(CONNECTION.URI, CONNECTION.CONFIG)
 
-models.forEach((model) => {
-  model(sequelize)
-})
+models.forEach((model) => model(sequelize))
 
-const { User, Company, Offer, Role, Application, Applicant, Faq, Employer } =
-  sequelize.models
+const {
+  Certification,
+  Company,
+  Connection,
+  Education,
+  Evaluation,
+  WorkExperience,
+  JobApplication,
+  JobOffer,
+  Message,
+  Recommendation,
+  Resume,
+  Role,
+  Skill,
+  UserSkill,
+  User,
+} = sequelize.models
 
 Role.hasMany(User)
 User.belongsTo(Role)
 
-Company.hasMany(Employer)
-Employer.belongsTo(Company)
+User.hasMany(Company)
+Company.belongsTo(User)
 
-User.hasOne(Employer)
-Employer.belongsTo(User)
+User.hasMany(Certification)
+Certification.belongsTo(User)
 
-User.hasOne(Applicant)
-Applicant.belongsTo(User)
+User.hasMany(Education)
+Education.belongsTo(User)
 
-Employer.hasMany(Offer)
-Offer.belongsTo(Employer)
+User.hasOne(Resume)
+Resume.belongsTo(User)
 
-Applicant.hasMany(Application)
-Application.belongsTo(Applicant)
+User.belongsToMany(Skill, { through: UserSkill, foreignKey: 'UserId' })
+Skill.belongsToMany(User, { through: UserSkill, foreignKey: 'SkillId' })
 
-Offer.hasMany(Application)
-Application.belongsTo(Offer)
+Company.hasMany(JobOffer)
+JobOffer.belongsTo(Company)
+
+JobOffer.hasMany(JobApplication)
+JobApplication.belongsTo(JobOffer)
+
+User.hasMany(JobApplication)
+JobApplication.belongsTo(User)
+
+Connection.belongsTo(User, { as: 'SourceUser', foreignKey: 'UserSourceId' })
+Connection.belongsTo(User, { as: 'TargetUser', foreignKey: 'UserTargetId' })
+
+Message.belongsTo(User, { as: 'Recipient', foreignKey: 'RecipientId' })
+
+Message.belongsTo(User, { as: 'Sender', foreignKey: 'SenderId' })
+
+Recommendation.belongsTo(User, {
+  as: 'Recommender',
+  foreignKey: 'RecommenderId',
+})
+Recommendation.belongsTo(User, { foreignKey: 'UserId' })
+
+JobOffer.hasMany(Evaluation)
+Evaluation.belongsTo(JobOffer)
+
+User.hasMany(Evaluation)
+Evaluation.belongsTo(User)
+
+User.hasMany(WorkExperience)
+WorkExperience.belongsTo(User)
 
 export {
   sequelize,
-  User,
+  Certification,
   Company,
-  Offer,
+  Connection,
+  Education,
+  Evaluation,
+  WorkExperience,
+  JobApplication,
+  JobOffer,
+  Message,
+  Recommendation,
+  Resume,
   Role,
-  Application,
-  Applicant,
-  Faq,
-  Employer,
+  Skill,
+  UserSkill,
+  User,
 }

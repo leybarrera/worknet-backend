@@ -1,15 +1,16 @@
 import { DataTypes } from 'sequelize'
 
-const OfferModel = (sequelize) => {
+const JobOfferModel = (sequelize) => {
   sequelize.define(
-    'Offer',
+    'JobOffer',
     {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      job_title: {
+
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -17,51 +18,53 @@ const OfferModel = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      requirements: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: false,
-        validate: {
-          min: 1,
-        },
-      },
-      publication_date: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
-
-      expiration_date: {
-        type: DataTypes.DATE,
-      },
-
-      salary: {
+      location: {
         type: DataTypes.STRING,
         allowNull: false,
       },
 
-      modality: {
+      job_type: {
         type: DataTypes.ENUM,
         allowNull: false,
-        values: ['Tiempo Completo', 'Medio Tiempo', 'Remoto', 'Hibrido'],
+        values: [
+          'Tiempo completo',
+          'Medio tiempo',
+          'Contrato',
+          'Freelance',
+          'Practicante',
+        ],
       },
 
-      isDeleted: {
+      salary: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+        validate: {
+          min: 0,
+        },
+      },
+
+      posted_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+
+      ai_recommendation: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
 
-      EmployerId: {
+      CompanyId: {
         type: DataTypes.UUID,
         allowNull: false,
+
         references: {
-          model: 'Employers',
+          model: 'Companies',
           key: 'id',
         },
       },
     },
-    {
-      timestamps: false,
-    }
+    { timestamps: false }
   )
 }
 
-export default OfferModel
+export default JobOfferModel

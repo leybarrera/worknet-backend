@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize'
 
-const RoleModel = (sequelize) => {
+const SkillModel = (sequelize) => {
   sequelize.define(
-    'Role',
+    'Skill',
     {
       id: {
         type: DataTypes.UUID,
@@ -14,14 +14,6 @@ const RoleModel = (sequelize) => {
         allowNull: false,
         unique: true,
       },
-      description: {
-        type: DataTypes.STRING,
-      },
-
-      isDeleted: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
     },
     {
       timestamps: false,
@@ -29,4 +21,4 @@ const RoleModel = (sequelize) => {
   )
 }
 
-export default RoleModel
+export default SkillModel
