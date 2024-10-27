@@ -1,12 +1,12 @@
 import register from './post.service.js'
-import update from './update.service.js'
 import remove from './delete.service.js'
-import { getAll, getById } from './get.service.js'
+import { getByUser, getConversation } from './get.service.js'
+import updateIsRead from './update.service.js'
 
 export default {
   register,
-  update,
+  updateIsRead,
   remove,
-  getAll,
-  getById,
+  getByUser,
+  getConversation,
 }
