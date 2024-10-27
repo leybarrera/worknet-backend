@@ -56,7 +56,6 @@ const JobOfferModel = (sequelize) => {
       CompanyId: {
         type: DataTypes.UUID,
         allowNull: false,
-
         references: {
           model: 'Companies',
           key: 'id',
