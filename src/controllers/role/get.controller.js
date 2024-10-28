@@ -11,6 +11,17 @@ const getAll = async (req, res) => {
   }
 }
 
+const getAllValids = async (req, res) => {
+  try {
+    const { code, roles } = await roleService.getAllValids()
+    return res.status(code).json({ roles })
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: `Error interno del servidor. ${error}` })
+  }
+}
+
 const getById = async (req, res) => {
   try {
     const { id } = req.params
@@ -23,4 +34,4 @@ const getById = async (req, res) => {
   }
 }
 
-export { getAll, getById }
+export { getAll, getById, getAllValids }

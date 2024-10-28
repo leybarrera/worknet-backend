@@ -1,4 +1,4 @@
-import { Message } from '../../lib/conn'
+import { Message } from '../../lib/conn.js'
 
 const updateIsRead = async (id) => {
   const message = await Message.findOne({

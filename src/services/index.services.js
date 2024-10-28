@@ -4,7 +4,7 @@ import connectionService from './connection/index.service.js'
 import evaluationService from './evaluation/index.service.js'
 import interactionService from './interaction/index.service.js'
 import messageService from './message/index.service.js'
-import recomendationService from './recomendation/index.service.js'
+import recommendationService from './recommendation/index.service.js'
 import resumeService from './resume/index.service.js'
 import skillService from './skill/index.service.js'
 import userService from './user/index.service.js'
@@ -21,7 +21,7 @@ export {
   evaluationService,
   interactionService,
   messageService,
-  recomendationService,
+  recommendationService,
   resumeService,
   skillService,
   userService,

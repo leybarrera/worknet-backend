@@ -35,10 +35,10 @@ const UserModel = (sequelize) => {
 
       profile_picture: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          isUrl: true,
-        },
+        // allowNull: false,
+        // validate: {
+        //   isUrl: true,
+        // },
       },
       location: {
         type: DataTypes.STRING,

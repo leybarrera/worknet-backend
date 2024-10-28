@@ -1,4 +1,4 @@
-import { JobOffer } from '../../lib/conn'
+import { JobOffer } from '../../lib/conn.js'
 
 const update = async (id, data) => {
   const jobOffer = await JobOffer.findOne({

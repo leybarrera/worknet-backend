@@ -1,4 +1,4 @@
-import { Company } from '../../lib/conn'
+import { Company } from '../../lib/conn.js'
 
 const companyExists = async (id) => {
   const company = await Company.findOne({

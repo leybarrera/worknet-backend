@@ -1,4 +1,4 @@
-import { Connection } from '../../lib/conn'
+import { Connection } from '../../lib/conn.js'
 
 const getByUser = async (id) => {
   const connections = await Connection.findAll({

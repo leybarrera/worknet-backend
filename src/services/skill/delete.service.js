@@ -1,4 +1,4 @@
-import { Skill } from '../../lib/conn'
+import { Skill } from '../../lib/conn.js'
 
 const remove = async (id) => {
   const skill = await Skill.findOne({

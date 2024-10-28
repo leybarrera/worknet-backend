@@ -1,4 +1,4 @@
-import { Resume } from '../../lib/conn'
+import { Resume } from '../../lib/conn.js'
 
 const remove = async (id) => {
   const rowsDeleted = await Resume.destroy({

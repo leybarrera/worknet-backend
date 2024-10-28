@@ -7,6 +7,5 @@ export default {
   register,
   update,
   remove,
-  getAll,
   getByUser,
 }

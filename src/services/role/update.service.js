@@ -1,5 +1,5 @@
 import { Op } from 'sequelize'
-import { Role } from '../../lib/conn'
+import { Role } from '../../lib/conn.js'
 
 const existOtherRole = async (id, name) => {
   const role = await Role.findOne({
@@ -28,7 +28,12 @@ const update = async (id, data) => {
 
   if (!role) return { code: 404, message: 'Rol no encontrado' }
 
-  const [rows] = await role.update(data)
+  const [rows] = await Role.update(data, {
+    where: {
+      id,
+      isDeleted: false,
+    },
+  })
   return rows > 0
     ? { code: 200, message: 'Rol actualizado con éxito' }
     : {

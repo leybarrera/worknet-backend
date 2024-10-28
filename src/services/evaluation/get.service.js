@@ -1,4 +1,4 @@
-import { Evaluation, JobOffer, User } from '../../lib/conn'
+import { Evaluation, JobOffer, User } from '../../lib/conn.js'
 
 const getAll = async () => {
   const evaluations = await Evaluation.findAll({

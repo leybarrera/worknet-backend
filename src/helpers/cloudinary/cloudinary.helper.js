@@ -2,7 +2,7 @@ import { v2 as cloudinary } from 'cloudinary'
 
 const uploadImage = async (folder, file) => {
   const { secure_url } = await cloudinary.uploader.upload(file, {
-    folder: `worknet/users/${folder}`,
+    folder: `worknet/${folder}`,
   })
 
   return secure_url
@@ -10,7 +10,7 @@ const uploadImage = async (folder, file) => {
 
 const uploadCV = async (file) => {
   const { secure_url } = await cloudinary.uploader.upload(file, {
-    folder: `worknet/cvs/${folder}`,
+    folder: `worknet/${folder}`,
     resource_type: 'raw',
   })
 

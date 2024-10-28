@@ -1,5 +1,5 @@
 import { Op } from 'sequelize'
-import { Message } from '../../lib/conn'
+import { Message } from '../../lib/conn.js'
 
 const getConversation = async (RecipientId, SenderId) => {
   const messages = await Message.findAll({
