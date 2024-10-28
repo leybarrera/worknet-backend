@@ -18,7 +18,7 @@ const CertificationModel = (sequelize) => {
         allowNull: false,
       },
       obtained_date: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         allowNull: false,
       },
 

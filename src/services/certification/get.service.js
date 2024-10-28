@@ -24,8 +24,8 @@ const getByUser = async (UserId) => {
   const certifications = await Certification.findAll({
     where: {
       UserId,
-      include: [User],
     },
+    include: [User],
   })
 
   return { code: 200, certifications }

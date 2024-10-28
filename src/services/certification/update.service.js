@@ -1,3 +1,5 @@
+import { Certification } from '../../lib/conn.js'
+
 const update = async (id, data) => {
   const [rows] = await Certification.update(data, {
     where: {

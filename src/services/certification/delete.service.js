@@ -1,3 +1,5 @@
+import { Certification } from '../../lib/conn.js'
+
 const remove = async (id) => {
   const rowsDeleted = await Certification.destroy({
     where: {

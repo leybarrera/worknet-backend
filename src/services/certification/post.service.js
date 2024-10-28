@@ -1,4 +1,4 @@
-import { User } from '../../lib/conn.js'
+import { Certification, User } from '../../lib/conn.js'
 
 const userExists = async (id) => {
   const user = await User.findOne({
