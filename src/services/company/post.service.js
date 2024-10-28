@@ -1,3 +1,4 @@
+import { Op } from 'sequelize'
 import { Company } from '../../lib/conn.js'
 
 const companyExists = async (name) => {

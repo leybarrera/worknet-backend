@@ -13,4 +13,16 @@ const update = async (req, res) => {
   }
 }
 
-export default update
+const recoveryUser = async (req, res) => {
+  try {
+    const { id } = req.params
+    const { code, message } = await userService.recoveryUser(id)
+    return res.status(code).json({ message })
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: `Error interno del servidor. ${error}` })
+  }
+}
+
+export { update, recoveryUser }

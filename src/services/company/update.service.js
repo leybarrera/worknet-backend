@@ -1,3 +1,4 @@
+import { Op } from 'sequelize'
 import { Company } from '../../lib/conn.js'
 
 const existOtherCompany = async (id, name) => {
@@ -29,7 +30,11 @@ const update = async (id, data) => {
 
   if (!company) return { code: 404, message: 'Empresa no encontrada' }
 
-  const [rows] = await company.update(data)
+  const [rows] = await Company.update(data, {
+    where: {
+      id,
+    },
+  })
   return rows > 0
     ? { code: 200, message: 'Empresa actualizada con éxito' }
     : {
@@ -39,4 +44,19 @@ const update = async (id, data) => {
       }
 }
 
-export default update
+const recoveryCompany = async (id) => {
+  const company = await Company.findOne({
+    where: {
+      id,
+      isDeleted: true,
+    },
+  })
+
+  if (!company) return { code: 404, message: 'La empresa no fue encontrada' }
+
+  company.isDeleted = false
+  await company.save()
+  return { code: 200, message: 'La empresa fue recuperada con éxito' }
+}
+
+export { update, recoveryCompany }

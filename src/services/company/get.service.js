@@ -1,10 +1,11 @@
-import { Company } from '../../lib/conn.js'
+import { Company, User } from '../../lib/conn.js'
 
 const getAll = async () => {
   const companies = await Company.findAll({
     where: {
       isDeleted: false,
     },
+    include: [User],
   })
   return { code: 200, companies }
 }
@@ -14,6 +15,7 @@ const getById = async (id) => {
       id,
       isDeleted: false,
     },
+    include: [User],
   })
   return company
     ? { code: 200, company }
@@ -25,6 +27,7 @@ const getByUser = async (UserId) => {
       UserId,
       isDeleted: false,
     },
+    include: [User],
   })
   return company
     ? { code: 200, company }

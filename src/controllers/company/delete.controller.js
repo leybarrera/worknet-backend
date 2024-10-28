@@ -1,4 +1,4 @@
-import { companyService } from '../../services/index.services'
+import { companyService } from '../../services/index.services.js'
 
 const remove = async (req, res) => {
   try {

@@ -44,4 +44,17 @@ const update = async (id, data) => {
       }
 }
 
-export default update
+const recoveryUser = async (id) => {
+  const user = await User.findOne({
+    where: {
+      id,
+      isDeleted: true,
+    },
+  })
+  if (!user) return { code: 404, message: 'Usuario no encontrado' }
+
+  user.isDeleted = false
+  await user.save()
+  return { code: 200, message: 'Usuario recuperado con éxito' }
+}
+export { update, recoveryUser }

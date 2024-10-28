@@ -8,7 +8,7 @@ import {
   getOnlyInactives,
 } from './get.controller.js'
 import register from './post.controller.js'
-import update from './put.controller.js'
+import { update, recoveryUser } from './put.controller.js'
 
 export default {
   remove,
@@ -20,4 +20,5 @@ export default {
   getOnlyInactives,
   register,
   update,
+  recoveryUser,
 }

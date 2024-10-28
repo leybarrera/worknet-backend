@@ -1,5 +1,5 @@
 import register from './post.service.js'
-import update from './update.service.js'
+import { update, recoveryUser } from './update.service.js'
 import remove from './delete.service.js'
 import {
   getAll,
@@ -14,6 +14,7 @@ export default {
   register,
   update,
   remove,
+  recoveryUser,
   getAll,
   getById,
   getOnlyActives,

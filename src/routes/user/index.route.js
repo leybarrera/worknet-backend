@@ -12,5 +12,6 @@ userRouter.get('/only/inactives', userController.getOnlyInactives)
 userRouter.post('/', userController.register)
 userRouter.delete('/:id', userController.remove)
 userRouter.put('/:id', userController.update)
+userRouter.put('/recovery/:id', userController.recoveryUser)
 
 export default userRouter

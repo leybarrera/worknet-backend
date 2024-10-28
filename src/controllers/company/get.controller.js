@@ -28,7 +28,11 @@ const getByUser = async (req, res) => {
     const { user_id: UserId } = req.params
     const { code, message, company } = await companyService.getByUser(UserId)
     return res.status(code).json(message ? { message } : { company })
-  } catch (error) {}
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: `Error interno del servidor. ${error}` })
+  }
 }
 
 export { getAll, getById, getByUser }
