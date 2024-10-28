@@ -30,7 +30,11 @@ const update = async (id, data) => {
 
   if (password) data.password = await bcryptUtil.hashPassword(password)
 
-  const [rows] = await user.update(data)
+  const [rows] = await User.update(data, {
+    where: {
+      id,
+    },
+  })
   return rows > 0
     ? { code: 200, message: 'Usuario actualizado con éxito' }
     : {

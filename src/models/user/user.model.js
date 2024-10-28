@@ -54,7 +54,7 @@ const UserModel = (sequelize) => {
       },
       RoleId: {
         type: DataTypes.UUID,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: 'Roles',
           key: 'id',

@@ -10,6 +10,7 @@ const register = async (req, res) => {
     const { code, message } = await userService.register(data)
     return res.status(code).json({ message })
   } catch (error) {
+    console.log(error)
     return res
       .status(500)
       .json({ message: `Error interno del servidor. ${error}` })
