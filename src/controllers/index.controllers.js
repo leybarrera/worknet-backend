@@ -11,7 +11,7 @@ import userController from './user/index.controller.js'
 import skillController from './skill/index.controller.js'
 
 import jobApplicationController from './job-application/index.controller.js'
-import jobOffernController from './job-offer/index.controller.js'
+import jobOfferController from './job-offer/index.controller.js'
 import userSkillController from './user-skill/index.controller.js'
 import workExperienceController from './work-experience/index.controller.js'
 
@@ -28,7 +28,7 @@ export {
   userController,
   skillController,
   jobApplicationController,
-  jobOffernController,
+  jobOfferController,
   userSkillController,
   workExperienceController,
 }

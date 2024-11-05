@@ -1,7 +1,33 @@
-const getAll = async (req, res) => {}
+import { connectionService } from '../../services/index.services'
 
-const getById = async (req, res) => {}
+const getByUser = async (req, res) => {
+  try {
+    const { UserSourceId } = req.body
+    const { code, message, connections } = await connectionService.getByUser(
+      UserSourceId
+    )
 
-const getByUser = async (req, res) => {}
+    return res.status(code).json(message ? { message } : { connections })
+  } catch (error) {
+    return res.status(500).json({
+      message: `Error interno en el servidor. ${error}`,
+    })
+  }
+}
 
-export { getAll, getById, getByUser }
+const getPendingConnections = async (req, res) => {
+  try {
+    const { UserSourceId } = req.body
+    const { code, message, connections } = await connectionService.getByUser(
+      UserSourceId
+    )
+
+    return res.status(code).json(message ? { message } : { connections })
+  } catch (error) {
+    return res.status(500).json({
+      message: `Error interno en el servidor. ${error}`,
+    })
+  }
+}
+
+export { getByUser, getPendingConnections }
