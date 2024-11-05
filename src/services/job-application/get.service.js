@@ -48,4 +48,4 @@ const getByJobOffer = async (JobOfferId) => {
       }
 }
 
-export { getAll, getById }
+export { getAll, getByUser, getByJobOffer }

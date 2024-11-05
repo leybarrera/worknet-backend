@@ -6,6 +6,7 @@ import certificationRouter from './certification/index.route.js'
 import jobOfferRouter from './job-offer/index.route.js'
 import connectionRouter from './connection/connection.route.js'
 import evaluationRouter from './evaluation/evaluation.route.js'
+import jobApplicationRouter from './job-application/job-application.route.js'
 
 const rootRouter = Router()
 
@@ -16,4 +17,5 @@ rootRouter.use('/companies', companyRouter)
 roleRouter.use('/job-offers', jobOfferRouter)
 roleRouter.use('/connections', connectionRouter)
 roleRouter.use('/evaluations', evaluationRouter)
+roleRouter.use('/job-applications', jobApplicationRouter)
 export default rootRouter
