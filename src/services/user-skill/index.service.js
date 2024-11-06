@@ -4,7 +4,6 @@ import { getAll, getBySkill, getByUser } from './get.service.js'
 
 export default {
   register,
-  remove,
   getAll,
   getBySkill,
   getByUser,

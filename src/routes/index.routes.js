@@ -10,6 +10,7 @@ import jobApplicationRouter from './job-application/job-application.route.js'
 import messageRouter from './message/message.route.js'
 import resumeRouter from './resume/resume.route.js'
 import skillRouter from './skill/skill.route.js'
+import userSkillRouter from './user-skill/user-skill.route.js'
 
 const rootRouter = Router()
 
@@ -24,4 +25,5 @@ roleRouter.use('/job-applications', jobApplicationRouter)
 roleRouter.use('/messages', messageRouter)
 roleRouter.use('/resumes', resumeRouter)
 roleRouter.use('/skills', skillRouter)
+roleRouter.use('/user-skills', userSkillRouter)
 export default rootRouter

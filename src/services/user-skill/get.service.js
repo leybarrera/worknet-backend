@@ -4,7 +4,7 @@ const getAll = async () => {
   const userSkills = await UserSkill.findAll({
     include: [User, Skill],
   })
-  return userSkills
+  return { code: 200, userSkills }
 }
 const getByUser = async (UserId) => {
   const userSkills = await UserSkill.findAll({
@@ -13,7 +13,7 @@ const getByUser = async (UserId) => {
     },
     include: [User, Skill],
   })
-  return userSkills
+  return { code: 200, userSkills }
 }
 const getBySkill = async (SkillId) => {
   const userSkills = await UserSkill.findAll({
@@ -22,7 +22,7 @@ const getBySkill = async (SkillId) => {
     },
     include: [User, Skill],
   })
-  return userSkills
+  return { code: 200, userSkills }
 }
 
 export { getAll, getByUser, getBySkill }

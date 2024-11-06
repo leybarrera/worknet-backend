@@ -11,6 +11,7 @@ import userService from './user/index.service.js'
 import jobApplicationService from './job-application/index.service.js'
 import jobOfferService from './job-offer/index.service.js'
 import workExperienceService from './work-experience/index.service.js'
+import userSkillService from './user-skill/index.service.js'
 
 import roleService from './role/index.service.js'
 
@@ -28,5 +29,6 @@ export {
   jobApplicationService,
   jobOfferService,
   workExperienceService,
+  userSkillService,
   roleService,
 }
