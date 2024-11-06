@@ -11,7 +11,7 @@ const update = async (id, data) => {
     return { code: 404, message: 'Experiencia laboral no encontrada' }
   }
   await workExperience.update(data)
-  return { code: 200, workExperience }
+  return { code: 200, message: 'Experiencia laboral actualizada' }
 }
 
 export default update
