@@ -1,5 +1,5 @@
 import { User } from '../../lib/conn.js'
-import { jwtUtil } from '../../utils/index.utils'
+import { jwtUtil } from '../../utils/index.utils.js'
 
 const login = async (email, password) => {
   const user = await User.findOne({

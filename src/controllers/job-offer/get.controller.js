@@ -1,4 +1,4 @@
-import { jobOfferService } from '../../services/index.services'
+import { jobOfferService } from '../../services/index.services.js'
 
 const getAll = async (req, res) => {
   try {

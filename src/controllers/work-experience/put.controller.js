@@ -1,4 +1,4 @@
-import { workExperienceService } from '../../services/index.services'
+import { workExperienceService } from '../../services/index.services.js'
 
 const update = async (req, res) => {
   try {

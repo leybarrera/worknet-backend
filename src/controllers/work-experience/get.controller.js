@@ -13,4 +13,4 @@ const getByUser = async (req, res) => {
   }
 }
 
-export { getAll, getById, getByUser }
+export { getByUser }

@@ -1,4 +1,4 @@
-import { Recommendation } from '../../lib/conn'
+import { Recommendation } from '../../lib/conn.js'
 
 const update = async (id, data) => {
   const recommendation = await Recommendation.findOne({

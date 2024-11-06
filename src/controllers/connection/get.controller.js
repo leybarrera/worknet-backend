@@ -1,8 +1,8 @@
-import { connectionService } from '../../services/index.services'
+import { connectionService } from '../../services/index.services.js'
 
 const getByUser = async (req, res) => {
   try {
-    const { UserSourceId } = req.body
+    const { id: UserSourceId } = req.body
     const { code, message, connections } = await connectionService.getByUser(
       UserSourceId
     )
@@ -17,7 +17,7 @@ const getByUser = async (req, res) => {
 
 const getPendingConnections = async (req, res) => {
   try {
-    const { UserSourceId } = req.body
+    const { id: UserSourceId } = req.body
     const { code, message, connections } = await connectionService.getByUser(
       UserSourceId
     )
