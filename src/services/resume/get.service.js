@@ -24,4 +24,4 @@ const getByUser = async (UserId) => {
     ? { code: 200, resume }
     : { code: 404, message: 'Currículum no encontrado' }
 }
-export { getAll, getById }
+export { getAll, getById, getByUser }
