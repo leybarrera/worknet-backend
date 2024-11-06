@@ -15,7 +15,10 @@ import jobOfferController from './job-offer/index.controller.js'
 import userSkillController from './user-skill/index.controller.js'
 import workExperienceController from './work-experience/index.controller.js'
 
+import authController from './auth/index.controller.js'
+
 export {
+  authController,
   certificactionController,
   companyController,
   connectionController,
