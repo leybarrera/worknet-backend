@@ -22,6 +22,7 @@ const {
   Skill,
   UserSkill,
   User,
+  Interaction,
 } = sequelize.models
 
 Role.hasMany(User)
@@ -90,4 +91,5 @@ export {
   Skill,
   UserSkill,
   User,
+  Interaction,
 }
