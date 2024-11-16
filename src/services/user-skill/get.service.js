@@ -1,9 +1,7 @@
 import { Skill, User, UserSkill } from '../../lib/conn.js'
 
 const getAll = async () => {
-  const userSkills = await UserSkill.findAll({
-    include: [User, Skill],
-  })
+  const userSkills = await UserSkill.findAll({})
   return { code: 200, userSkills }
 }
 const getByUser = async (UserId) => {
@@ -11,16 +9,16 @@ const getByUser = async (UserId) => {
     where: {
       UserId,
     },
-    include: [User, Skill],
   })
-  return { code: 200, userSkills }
+  return userSkills.length > 0
+    ? { code: 200, userSkills }
+    : { code: 404, userSkills: [] }
 }
 const getBySkill = async (SkillId) => {
   const userSkills = await UserSkill.findAll({
     where: {
       SkillId,
     },
-    include: [User, Skill],
   })
   return { code: 200, userSkills }
 }

@@ -40,6 +40,12 @@ const UserModel = (sequelize) => {
         //   isUrl: true,
         // },
       },
+
+      gender: {
+        type: DataTypes.ENUM,
+        values: ['M', 'F', 'Other'],
+        allowNull: false,
+      },
       location: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -52,13 +58,10 @@ const UserModel = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
-      RoleId: {
-        type: DataTypes.UUID,
-        allowNull: true,
-        references: {
-          model: 'Roles',
-          key: 'id',
-        },
+      role: {
+        type: DataTypes.ENUM,
+        values: ['Admin', 'User'],
+        defaultValue: 'User',
       },
     },
     { timestamps: false }

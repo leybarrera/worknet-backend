@@ -22,7 +22,7 @@ const getById = async (id) => {
     : { code: 404, message: 'Empresa no encontrada' }
 }
 const getByUser = async (UserId) => {
-  const company = await Company.findOne({
+  const company = await Company.findAll({
     where: {
       UserId,
       isDeleted: false,

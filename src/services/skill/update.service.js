@@ -1,3 +1,4 @@
+import { Op } from 'sequelize'
 import { Skill } from '../../lib/conn.js'
 
 const existOtherSkill = async (id, name) => {
@@ -5,6 +6,9 @@ const existOtherSkill = async (id, name) => {
     where: {
       name,
       isDeleted: false,
+      [Op.not]: {
+        id,
+      },
     },
   })
   return skill
@@ -23,7 +27,11 @@ const update = async (id, data) => {
 
   if (!skill) return { code: 404, message: 'Habilidad no encontrada' }
 
-  const [rows] = await skill.update(data)
+  const [rows] = await Skill.update(data, {
+    where: {
+      id,
+    },
+  })
   return rows > 0
     ? { code: 200, message: 'Habilidad actualizada con éxito' }
     : {

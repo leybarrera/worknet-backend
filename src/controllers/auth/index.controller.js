@@ -7,7 +7,7 @@ const login = async (req, res) => {
       email,
       password
     )
-    return res.status(code).json(mes ? { message } : { token, user })
+    return res.status(code).json(message ? { message } : { token, user })
   } catch (error) {
     return res.status(500).json({
       message: 'Error interno en el servidor. ' + error,

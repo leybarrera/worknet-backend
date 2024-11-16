@@ -38,7 +38,7 @@ const getById = async (id) => {
     : { code: 404, message: 'Usuario no encontrado' }
 }
 
-const getByEmail = async (id) => {
+const getByEmail = async (email) => {
   const user = await User.findOne({
     where: {
       email,

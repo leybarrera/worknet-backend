@@ -1,5 +1,5 @@
 import { User } from '../../lib/conn.js'
-import { jwtUtil } from '../../utils/index.utils.js'
+import { jwtUtil, bcryptUtil } from '../../utils/index.utils.js'
 
 const login = async (email, password) => {
   const user = await User.findOne({
@@ -22,7 +22,7 @@ const login = async (email, password) => {
       message: 'Credenciales incorrectas. Cuenta no activada.',
     }
 
-  const { password: passwordUser, ...userFound } = user
+  const { password: passwordUser, ...userFound } = user.toJSON()
   const isValidPassword = await bcryptUtil.comparePassword(
     password,
     passwordUser

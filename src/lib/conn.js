@@ -25,9 +25,6 @@ const {
   Interaction,
 } = sequelize.models
 
-Role.hasMany(User)
-User.belongsTo(Role)
-
 User.hasMany(Company)
 Company.belongsTo(User)
 

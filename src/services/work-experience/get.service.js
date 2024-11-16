@@ -1,4 +1,4 @@
-import { WorkExperience } from '../../lib/conn.js'
+import { User, WorkExperience } from '../../lib/conn.js'
 
 const userExists = async (id) => {
   const user = await User.findOne({
@@ -17,7 +17,6 @@ const getByUser = async (id) => {
     where: {
       UserId: id,
     },
-    include: [User],
   })
 
   return { code: 200, workExperiences }

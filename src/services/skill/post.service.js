@@ -1,3 +1,4 @@
+import { Op } from 'sequelize'
 import { Skill } from '../../lib/conn.js'
 
 const skillExists = async (name) => {

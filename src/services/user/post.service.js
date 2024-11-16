@@ -21,13 +21,11 @@ const validateRole = async (id) => {
 }
 
 const register = async (data) => {
-  const { email, RoleId, password } = data
+  const { email, password } = data
 
   if (await userExistsByEmail(email))
     return { code: 400, message: 'Ya existe otro usuario con este email' }
 
-  if (!(await validateRole(RoleId)))
-    return { code: 400, message: 'Rol no encontrado' }
   const hash = await bcryptUtil.hashPassword(password)
 
   const user = await User.create({

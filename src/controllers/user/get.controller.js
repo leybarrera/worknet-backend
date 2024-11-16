@@ -25,7 +25,9 @@ const getById = async (req, res) => {
 
 const getByEmail = async (req, res) => {
   try {
+    console.log('entra')
     const { email } = req.query
+    console.log(email)
     const { code, message, user } = await userService.getByEmail(email)
     return res.status(code).json(message ? { message } : { user })
   } catch (error) {
