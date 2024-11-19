@@ -17,6 +17,16 @@ const UserModel = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+
+      dni: {
+        type: DataTypes.STRING,
+      },
+
+      phone: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -43,7 +53,7 @@ const UserModel = (sequelize) => {
 
       gender: {
         type: DataTypes.ENUM,
-        values: ['M', 'F', 'Other'],
+        values: ['M', 'F', 'Otro'],
         allowNull: false,
       },
       location: {
@@ -60,8 +70,8 @@ const UserModel = (sequelize) => {
       },
       role: {
         type: DataTypes.ENUM,
-        values: ['Admin', 'User'],
-        defaultValue: 'User',
+        values: ['Administrador', 'Postulante', 'Reclutador', 'Empresa'],
+        defaultValue: 'Postulante',
       },
     },
     { timestamps: false }

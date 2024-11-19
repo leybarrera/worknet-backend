@@ -23,6 +23,8 @@ const {
   UserSkill,
   User,
   Interaction,
+  Language,
+  Reference,
 } = sequelize.models
 
 User.hasMany(Company)
@@ -71,6 +73,12 @@ Evaluation.belongsTo(User)
 User.hasMany(WorkExperience)
 WorkExperience.belongsTo(User)
 
+User.hasMany(Language)
+Language.belongsTo(User)
+
+User.hasMany(Reference)
+Reference.belongsTo(User)
+
 export {
   sequelize,
   Certification,
@@ -88,5 +96,7 @@ export {
   Skill,
   UserSkill,
   User,
+  Language,
+  Reference,
   Interaction,
 }

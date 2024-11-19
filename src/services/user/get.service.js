@@ -1,4 +1,15 @@
-import { User } from '../../lib/conn.js'
+import {
+  Connection,
+  Education,
+  JobApplication,
+  Language,
+  Reference,
+  Resume,
+  Skill,
+  User,
+  UserSkill,
+  WorkExperience,
+} from '../../lib/conn.js'
 
 const getAll = async () => {
   const users = await User.findAll({})
@@ -32,6 +43,16 @@ const getById = async (id) => {
       isActive: true,
       isDeleted: false,
     },
+
+    include: [
+      Resume,
+      Skill,
+      WorkExperience,
+      Education,
+      JobApplication,
+      Language,
+      Reference,
+    ],
   })
   return user
     ? { code: 200, user }

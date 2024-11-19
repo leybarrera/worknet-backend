@@ -6,8 +6,10 @@ import EvaluationModel from './evaluation/evaluation.model.js'
 import InteractionModel from './interaction/interaction.model.js'
 import JobApplicationModel from './job-application/job-application.model.js'
 import JobOfferModel from './job-offer/job-offer.model.js'
+import LanguageModel from './language/language.model.js'
 import MessageModel from './message/message.model.js'
 import RecommendationModel from './recomendation/recommendation.model.js'
+import ReferenceModel from './reference/reference.model.js'
 import ResumeModel from './resume/resume.model.js'
 import RoleModel from './role/role.model.js'
 import SkillModel from './skill/skill.model.js'
@@ -32,4 +34,6 @@ export const models = [
   UserModel,
   UserSkillModel,
   WorkExperienceModel,
+  LanguageModel,
+  ReferenceModel,
 ]
