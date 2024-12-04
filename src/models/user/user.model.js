@@ -39,7 +39,7 @@ const UserModel = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          len: [8, 255],
+          len: [2, 255],
         },
       },
 
@@ -70,8 +70,8 @@ const UserModel = (sequelize) => {
       },
       role: {
         type: DataTypes.ENUM,
-        values: ['Administrador', 'Postulante', 'Reclutador', 'Empresa'],
-        defaultValue: 'Postulante',
+        values: ['Administrador', 'Candidato', 'Reclutador'],
+        defaultValue: 'Candidato',
       },
     },
     { timestamps: false }

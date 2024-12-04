@@ -27,9 +27,6 @@ const {
   Reference,
 } = sequelize.models
 
-User.hasMany(Company)
-Company.belongsTo(User)
-
 User.hasMany(Certification)
 Certification.belongsTo(User)
 

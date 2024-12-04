@@ -1,4 +1,5 @@
 import { userService } from '../../services/index.services.js'
+import { jwtUtil } from '../../utils/index.utils.js'
 
 const getAll = async (req, res) => {
   try {
@@ -69,6 +70,30 @@ const getOnlyInactives = async (req, res) => {
       .json({ message: `Error interno del servidor. ${error}` })
   }
 }
+
+const getRecommendationsUserLogged = async (req, res) => {
+  try {
+    const { token } = req.query
+    const { id } = jwtUtil.verifyToken(token)
+    const { code, users } = await userService.getRecommendationsUserLogged(id)
+    return res.status(code).json({ users })
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error interno en el servidor. ' + error,
+    })
+  }
+}
+const getRecommendationsUserNotLogged = async (req, res) => {
+  try {
+    const { code, users } = await userService.getRecommendationsUserNotLogged()
+    return res.status(code).json({ users })
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error interno en el servidor. ' + error,
+    })
+  }
+}
+
 export {
   getAll,
   getById,
@@ -76,4 +101,6 @@ export {
   getOnlyValids,
   getOnlyActives,
   getOnlyInactives,
+  getRecommendationsUserLogged,
+  getRecommendationsUserNotLogged,
 }

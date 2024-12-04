@@ -1,3 +1,4 @@
+import { Op } from 'sequelize'
 import {
   Connection,
   Education,
@@ -12,7 +13,19 @@ import {
 } from '../../lib/conn.js'
 
 const getAll = async () => {
-  const users = await User.findAll({})
+  const users = await User.findAll({
+    where: {
+      role: {
+        [Op.ne]: 'Administrador', // Excluir los usuarios con rol 'Administrador'
+      },
+    },
+    include: [
+      {
+        model: Resume, // Incluye la tabla 'Resume'
+        required: false, // False si quieres incluir usuarios sin resumen
+      },
+    ],
+  })
   return { code: 200, users }
 }
 const getOnlyInactives = async () => {
@@ -72,6 +85,33 @@ const getByEmail = async (email) => {
     : { code: 404, message: 'Usuario no encontrado' }
 }
 
+const getRecommendationsUserLogged = async (id) => {
+  const users = await User.findAll({
+    where: {
+      isActive: true,
+      isDeleted: false,
+      [Op.and]: [
+        { id: { [Op.ne]: id } },
+        { role: { [Op.ne]: 'Administrador' } },
+      ],
+    },
+  })
+
+  return { code: 200, users }
+}
+
+const getRecommendationsUserNotLogged = async (id) => {
+  const users = await User.findAll({
+    where: {
+      isActive: true,
+      isDeleted: false,
+      role: { [Op.ne]: 'Administrador' },
+    },
+  })
+
+  return { code: 200, users }
+}
+
 export {
   getAll,
   getById,
@@ -79,4 +119,6 @@ export {
   getOnlyInactives,
   getOnlyValids,
   getByEmail,
+  getRecommendationsUserLogged,
+  getRecommendationsUserNotLogged,
 }

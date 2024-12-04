@@ -9,29 +9,18 @@ const WorkExperienceModel = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      job_title: {
+      company: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      company_name: {
+      position: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      start_date: {
+
+      duration: {
         type: DataTypes.STRING,
         allowNull: false,
-      },
-      end_date: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      description: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      currently_employed: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
       },
 
       UserId: {

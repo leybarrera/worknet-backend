@@ -2,8 +2,8 @@ import { jobOfferService } from '../../services/index.services.js'
 
 const getAll = async (req, res) => {
   try {
-    const { code, message } = await jobOfferService.getAll()
-    return res.status(code).json({ message })
+    const { code, jobOffers } = await jobOfferService.getAll()
+    return res.status(code).json({ jobOffers })
   } catch (error) {
     return res
       .status(500)

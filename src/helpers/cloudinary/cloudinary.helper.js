@@ -1,20 +1,60 @@
 import { v2 as cloudinary } from 'cloudinary'
+import stream from 'stream'
 
-const uploadImage = async (folder, file) => {
-  const { secure_url } = await cloudinary.uploader.upload(file, {
-    folder: `worknet/${folder}`,
+const uploadFile = async (folder, fileBuffer, fileName) => {
+  // Creamos un stream de lectura a partir del buffer
+  const bufferStream = new stream.PassThrough()
+  bufferStream.end(fileBuffer) // Pasamos el buffer al stream
+
+  return new Promise((resolve, reject) => {
+    // Usamos el método upload_stream de Cloudinary
+    const uploadStream = cloudinary.uploader.upload_stream(
+      {
+        folder: `worknet/${folder}`,
+        overwrite: true,
+        public_id: fileName,
+      },
+      (error, result) => {
+        if (error) {
+          reject(
+            new Error('Error uploading image to Cloudinary: ' + error.message)
+          )
+        } else {
+          resolve(result.secure_url)
+        }
+      }
+    )
+
+    // Pasamos el stream al uploader de Cloudinary
+    bufferStream.pipe(uploadStream)
   })
-
-  return secure_url
 }
 
-const uploadCV = async (file) => {
-  const { secure_url } = await cloudinary.uploader.upload(file, {
-    folder: `worknet/${folder}`,
-    resource_type: 'raw',
-  })
+const uploadPdf = async (folder, fileBuffer, fileName) => {
+  const bufferStream = new stream.PassThrough()
+  bufferStream.end(fileBuffer)
 
-  return secure_url
+  return new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      {
+        folder: `worknet/${folder}`,
+        overwrite: true,
+        public_id: fileName, // Usamos el nombre del archivo tal cual
+        resource_type: 'raw', // Usamos 'raw' para archivos que no son imágenes ni videos
+      },
+      (error, result) => {
+        if (error) {
+          reject(
+            new Error('Error uploading PDF to Cloudinary: ' + error.message)
+          )
+        } else {
+          resolve(result.secure_url) // URL segura del archivo subido
+        }
+      }
+    )
+
+    bufferStream.pipe(uploadStream)
+  })
 }
 
-export default { uploadImage, uploadCV }
+export default { uploadFile, uploadPdf }

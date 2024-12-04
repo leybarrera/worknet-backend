@@ -4,9 +4,7 @@
     {
       "type": "npm",
       "script": "dev",
-      "runOptions": {
-        "runOn": "folderOpen"
-      }
+      "runOptions": {}
     }
   ]
 }

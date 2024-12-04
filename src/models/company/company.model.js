@@ -23,28 +23,30 @@ const CompanyModel = (sequelize) => {
         allowNull: false,
       },
 
-      website_url: {
+      ruc: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+
+      website: {
         type: DataTypes.STRING,
       },
-      contact_email: {
+      email: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           isEmail: true,
         },
       },
-      contact_phone: {
+      phone: {
         type: DataTypes.STRING,
         allowNull: false,
       },
 
-      UserId: {
-        type: DataTypes.UUID,
-        allowNull: false,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
+      isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
 
       isDeleted: {

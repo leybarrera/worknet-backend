@@ -6,9 +6,11 @@ import {
   getOnlyValids,
   getOnlyActives,
   getOnlyInactives,
+  getRecommendationsUserLogged,
+  getRecommendationsUserNotLogged,
 } from './get.controller.js'
 import register from './post.controller.js'
-import { update, recoveryUser } from './put.controller.js'
+import { update, recoveryUser, updateProfile } from './put.controller.js'
 
 export default {
   remove,
@@ -18,7 +20,10 @@ export default {
   getOnlyValids,
   getOnlyActives,
   getOnlyInactives,
+  getRecommendationsUserLogged,
+  getRecommendationsUserNotLogged,
   register,
   update,
   recoveryUser,
+  updateProfile,
 }

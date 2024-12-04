@@ -34,7 +34,7 @@ const register = async (data) => {
   })
 
   return user
-    ? { code: 201, message: 'Usuario registrado con éxito' }
+    ? { code: 201, user, message: 'Usuario registrado con éxito' }
     : {
         code: 400,
         message:

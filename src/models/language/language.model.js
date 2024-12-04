@@ -9,10 +9,9 @@ const LanguageModel = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      language: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
       proficiency: {
         type: DataTypes.STRING,

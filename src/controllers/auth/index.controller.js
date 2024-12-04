@@ -1,3 +1,4 @@
+import { nodemailerHelper } from '../../helpers/index.helpers.js'
 import { authService } from '../../services/index.services.js'
 
 const login = async (req, res) => {
@@ -15,4 +16,25 @@ const login = async (req, res) => {
   }
 }
 
-export default { login }
+const accountActivation = async (req, res) => {
+  try {
+    const { token } = req.query
+    const { code, user, company, message } =
+      await authService.accountActivation(token)
+
+    if (user || company) {
+      nodemailerHelper.confirmActivation(
+        user.email || company.email,
+        user.name || company.name
+      )
+    }
+    return res.status(code).json({ message })
+  } catch (error) {
+    console.log(error.message)
+    return res.status(500).json({
+      message: 'Error interno en el servidor. ' + error,
+    })
+  }
+}
+
+export default { login, accountActivation }

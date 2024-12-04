@@ -57,4 +57,30 @@ const recoveryUser = async (id) => {
   await user.save()
   return { code: 200, message: 'Usuario recuperado con éxito' }
 }
-export { update, recoveryUser }
+
+const updateProfile = async (id, data) => {
+  const user = await User.findOne({
+    where: {
+      id,
+      isDeleted: false,
+    },
+  })
+
+  if (!user) return { code: 404, message: 'Usuario no encontrado' }
+
+  const [rows] = await User.update(data, {
+    where: {
+      id,
+    },
+  })
+
+  return rows > 0
+    ? { code: 200, message: 'Perfil actualizado con éxito' }
+    : {
+        code: 400,
+        message:
+          'No se pudo actualizar el perfil. Por favor, inténtelo más tarde',
+      }
+}
+
+export { update, recoveryUser, updateProfile }
