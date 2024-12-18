@@ -4,11 +4,19 @@ import { authService } from '../../services/index.services.js'
 const login = async (req, res) => {
   try {
     const { email, password } = req.body
-    const { code, message, token, user } = await authService.login(
+    const { code, message, token, user, company } = await authService.login(
       email,
       password
     )
-    return res.status(code).json(message ? { message } : { token, user })
+    if (user) {
+      return res.status(code).json({ token, user })
+    }
+
+    if (company) {
+      return res.status(code).json({ token, company })
+    }
+
+    return res.status(code).json({ message })
   } catch (error) {
     return res.status(500).json({
       message: 'Error interno en el servidor. ' + error,

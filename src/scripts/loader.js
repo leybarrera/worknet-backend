@@ -1,4 +1,4 @@
-import { Skill, User } from '../lib/conn.js'
+import { Company, Skill, User } from '../lib/conn.js'
 import { skills } from '../mocks/skills.js'
 import { skillService } from '../services/index.services.js'
 import { bcryptUtil } from '../utils/index.utils.js'
@@ -56,6 +56,18 @@ export const loaderData = async () => {
         isActive: 'true',
       },
     ])
+
+    await Company.create({
+      name: 'Company',
+      industry: 'Industria',
+      location: 'La Maná',
+      ruc: '123456789',
+      website: 'https://www.company.com',
+      isActive: 'true',
+      email: 'company@gmail.com',
+      password: pass,
+      phone: '222222225',
+    })
   } catch (error) {
     console.log('Error al cargar las skills: ', error.message)
   }

@@ -1,4 +1,4 @@
-import { Company } from '../../lib/conn.js'
+import { Company, JobOffer } from '../../lib/conn.js'
 
 const companyExists = async (id) => {
   const company = await Company.findOne({
@@ -11,6 +11,7 @@ const companyExists = async (id) => {
 }
 const register = async (data) => {
   const { CompanyId } = data
+  console.log(CompanyId)
 
   if (!(await companyExists(CompanyId)))
     return { code: 400, message: 'Empresa no encontrada' }

@@ -15,7 +15,7 @@ const JobOfferModel = (sequelize) => {
         allowNull: false,
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       location: {
@@ -46,6 +46,7 @@ const JobOfferModel = (sequelize) => {
       posted_at: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: DataTypes.NOW, // Establece la fecha y hora actuales por defecto
       },
 
       ai_recommendation: {
