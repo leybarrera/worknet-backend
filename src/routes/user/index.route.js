@@ -20,16 +20,27 @@ userRouter.get(
 )
 userRouter.post('/', userController.register)
 userRouter.delete('/:id', userController.remove)
-userRouter.put('/:id', userController.update)
 userRouter.put('/recovery/:id', userController.recoveryUser)
 
 userRouter.put(
-  '/settings/:id',
-  multerHelper.upload.fields([
-    { name: 'image', maxCount: 1 },
-    { name: 'resume', maxCount: 1 },
-  ]),
-  userController.updateProfile
+  '/:id',
+  multerHelper.upload.fields([{ name: 'image', maxCount: 1 }]),
+  userController.updateUserInfo
 )
+
+userRouter.put(
+  '/:id/resume',
+  multerHelper.upload.fields([{ name: 'resume', maxCount: 1 }]),
+  userController.updateUserResume
+)
+
+userRouter.put('/:id/education', userController.updateUserEducation)
+userRouter.put('/:id/experience', userController.updateUserWorkExperience)
+userRouter.put('/:id/skills', userController.updateUserSkills)
+userRouter.put('/:id/languages', userController.updateUserLanguage)
+userRouter.put('/:id/references', userController.updateUserReferences)
+
+// Get Other Users
+userRouter.get('/others/:user_id', userController.getOtherUsers)
 
 export default userRouter

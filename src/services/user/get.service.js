@@ -112,6 +112,19 @@ const getRecommendationsUserNotLogged = async (id) => {
   return { code: 200, users }
 }
 
+const getOtherUsers = async (id) => {
+  const users = await User.findAll({
+    where: {
+      isActive: true,
+      isDeleted: false,
+      role: { [Op.ne]: 'Administrador' },
+      id: { [Op.ne]: id },
+    },
+  })
+
+  return { code: 200, users }
+}
+
 export {
   getAll,
   getById,
@@ -121,4 +134,5 @@ export {
   getByEmail,
   getRecommendationsUserLogged,
   getRecommendationsUserNotLogged,
+  getOtherUsers,
 }

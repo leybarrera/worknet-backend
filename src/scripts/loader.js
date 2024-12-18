@@ -42,6 +42,19 @@ export const loaderData = async () => {
         role: 'Candidato',
         isActive: 'true',
       },
+
+      {
+        name: 'User',
+        surname: 'Candidato 2',
+        email: 'usercandidato2@gmail.com',
+        password: pass,
+        location: 'La Maná',
+        dni: '1111111110',
+        phone: '222222224',
+        gender: 'M',
+        role: 'Candidato',
+        isActive: 'true',
+      },
     ])
   } catch (error) {
     console.log('Error al cargar las skills: ', error.message)

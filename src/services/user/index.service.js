@@ -1,5 +1,15 @@
 import register from './post.service.js'
-import { update, recoveryUser, updateProfile } from './update.service.js'
+import {
+  update,
+  recoveryUser,
+  updateInfoUser,
+  updateUserEducation,
+  updateUserResume,
+  updateUserWorkExperience,
+  updateUserSkills,
+  updateUserLanguages,
+  updateUserReferences,
+} from './update.service.js'
 import remove from './delete.service.js'
 import {
   getAll,
@@ -10,6 +20,7 @@ import {
   getRecommendationsUserNotLogged,
   getOnlyValids,
   getByEmail,
+  getOtherUsers,
 } from './get.service.js'
 
 export default {
@@ -25,5 +36,12 @@ export default {
   getRecommendationsUserLogged,
   getRecommendationsUserNotLogged,
   getByEmail,
-  updateProfile,
+  getOtherUsers,
+  updateInfoUser,
+  updateUserEducation,
+  updateUserResume,
+  updateUserWorkExperience,
+  updateUserSkills,
+  updateUserLanguages,
+  updateUserReferences,
 }

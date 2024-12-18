@@ -13,11 +13,12 @@ const getAll = async (req, res) => {
 
 const getByUser = async (req, res) => {
   try {
-    const { id } = req.params
+    const { user_id } = req.params
     const { code, message, jobApplications } =
-      await jobApplicationService.getByUser(id)
+      await jobApplicationService.getByUser(user_id)
     return res.status(code).json(message ? { message } : { jobApplications })
   } catch (error) {
+    console.log(error.message)
     return res.status(500).json({
       message: 'Error interno en el servidor. ' + error,
     })

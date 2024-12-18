@@ -1,4 +1,4 @@
-import { User } from '../../lib/conn.js'
+import { Connection, User } from '../../lib/conn.js'
 
 const userTargetExists = async (id) => {
   const user = await User.findOne({
@@ -21,13 +21,13 @@ const register = async (data) => {
   if (!(await userTargetExists(UserTargetId)))
     return { code: 400, message: 'Usuario destino no encontrado' }
 
-  const connection = await User.create(data)
+  const connection = await Connection.create(data)
   return connection
-    ? { code: 201, message: 'Solicitud enviada.' }
+    ? { code: 201, message: 'Ahora sigues a este usuario.' }
     : {
         code: 400,
         message:
-          'No se pudo enviar la solicitud. Por favor, inténtelo más tarde',
+          'No puedes seguir a este usuario. Por favor, inténtelo más tarde',
       }
 }
 export default register

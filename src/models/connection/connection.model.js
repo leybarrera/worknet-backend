@@ -27,20 +27,9 @@ const ConnectionModel = (sequelize) => {
         },
       },
 
-      status: {
-        type: DataTypes.ENUM,
-        values: ['Pendiente', 'Aceptada'],
-        defaultValue: 'Pendiente',
-      },
-
-      request_date: {
+      date: {
         type: DataTypes.DATE,
-        allowNull: false,
-      },
-
-      acceptance_date: {
-        type: DataTypes.DATE,
-        allowNull: true,
+        defaultValue: DataTypes.NOW,
       },
     },
     { timestamps: false }

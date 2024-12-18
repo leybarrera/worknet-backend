@@ -7,6 +7,6 @@ connectionRouter.get('/user/:id', connectionController.getByUser)
 connectionRouter.get('/pending/:id', connectionController.getPendingConnections)
 connectionRouter.post('/', connectionController.register)
 connectionRouter.put('/:id', connectionController.update)
-connectionRouter.delete('/:id', connectionController.remove)
+connectionRouter.delete('/unfollow', connectionController.remove)
 
 export default connectionRouter

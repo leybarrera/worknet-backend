@@ -4,7 +4,6 @@ const getByUser = async (id) => {
   const connections = await Connection.findAll({
     where: {
       UserSourceId: id,
-      status: 'Aceptada',
     },
   })
 
@@ -15,7 +14,6 @@ const getPendingConnections = async (id) => {
   const connections = await Connection.findAll({
     where: {
       UserSourceId: id,
-      status: 'Pendiente',
     },
   })
   return { code: 200, connections }

@@ -94,12 +94,25 @@ const getRecommendationsUserNotLogged = async (req, res) => {
   }
 }
 
+const getOtherUsers = async (req, res) => {
+  try {
+    const { user_id } = req.params
+    const { code, users } = await userService.getOtherUsers(user_id)
+    return res.status(code).json({ users })
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error interno en el servidor. ' + error,
+    })
+  }
+}
+
 export {
   getAll,
   getById,
   getByEmail,
   getOnlyValids,
   getOnlyActives,
+  getOtherUsers,
   getOnlyInactives,
   getRecommendationsUserLogged,
   getRecommendationsUserNotLogged,

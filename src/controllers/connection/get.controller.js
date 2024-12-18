@@ -2,7 +2,7 @@ import { connectionService } from '../../services/index.services.js'
 
 const getByUser = async (req, res) => {
   try {
-    const { id: UserSourceId } = req.body
+    const { id: UserSourceId } = req.params
     const { code, message, connections } = await connectionService.getByUser(
       UserSourceId
     )

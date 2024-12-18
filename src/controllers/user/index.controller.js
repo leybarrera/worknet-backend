@@ -6,11 +6,22 @@ import {
   getOnlyValids,
   getOnlyActives,
   getOnlyInactives,
+  getOtherUsers,
   getRecommendationsUserLogged,
   getRecommendationsUserNotLogged,
 } from './get.controller.js'
 import register from './post.controller.js'
-import { update, recoveryUser, updateProfile } from './put.controller.js'
+import {
+  update,
+  recoveryUser,
+  updateUserInfo,
+  updateUserResume,
+  updateUserEducation,
+  updateUserWorkExperience,
+  updateUserSkills,
+  updateUserLanguage,
+  updateUserReferences,
+} from './put.controller.js'
 
 export default {
   remove,
@@ -20,10 +31,17 @@ export default {
   getOnlyValids,
   getOnlyActives,
   getOnlyInactives,
+  getOtherUsers,
   getRecommendationsUserLogged,
   getRecommendationsUserNotLogged,
   register,
   update,
   recoveryUser,
-  updateProfile,
+  updateUserInfo,
+  updateUserResume,
+  updateUserEducation,
+  updateUserWorkExperience,
+  updateUserSkills,
+  updateUserLanguage,
+  updateUserReferences,
 }

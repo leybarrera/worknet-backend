@@ -36,139 +36,168 @@ const recoveryUser = async (req, res) => {
   }
 }
 
-const updateProfile = async (req, res) => {
+const updateUserInfo = async (req, res) => {
   try {
     const { id } = req.params
     console.log(id)
-    const { image, resume } = req.files
-    const { education, user_info, experience, skills, language, references } =
-      req.body
-    // const secure_url_pdf = await cloudinaryHelper.uploadPdf(
-    //   'resumes',
-    //   resume[0].buffer,
-    //   resume[0].originalname
-    // )
+    const { image } = req.files
+    const { user_info } = req.body
 
     if (image) {
-      const secure_url_image = await cloudinaryHelper.uploadFile(
+      const secure_url = await cloudinaryHelper.uploadFile(
         'users',
         image[0].buffer,
         image[0].originalname
       )
-
-      // User
-      await User.update(
-        {
-          ...JSON.parse(user_info),
-          profile_picture: secure_url_image,
-        },
-        {
-          where: {
-            id,
-          },
-        }
-      )
+      user_info.profile_picture = secure_url
     }
-
-    if (resume) {
-      const secure_url_pdf = await cloudinaryHelper.uploadPdf(
-        'resumes',
-        resume[0].buffer,
-        resume[0].originalname
-      )
-
-      const resumeFound = await Resume.findOne({
-        where: {
-          UserId: id,
-        },
-      })
-
-      if (!resumeFound) {
-        const newResume = await Resume.create({
-          file_url: secure_url_pdf,
-          UserId: id,
-        })
-      }
-    }
-
-    if (education) {
-      const education_parse = JSON.parse(education)
-      const educationMap = education_parse.map((edu) => {
-        return {
-          institution: edu.institution,
-          degree_obtained: edu.degree_obtained,
-          start_date: edu.start_date,
-          end_date: edu.end_date,
-          UserId: id,
-        }
-      })
-
-      await Education.bulkCreate(educationMap)
-    }
-
-    if (experience) {
-      const experience_parse = JSON.parse(experience)
-      const experienceMap = experience_parse.map((exp) => {
-        return {
-          company: exp.company,
-          position: exp.position,
-          duration: exp.duration,
-          UserId: id,
-        }
-      })
-
-      await WorkExperience.bulkCreate(experienceMap)
-    }
-
-    if (skills) {
-      const skills_parse = JSON.parse(skills)
-      const skillsMap = skills_parse.map((skill) => {
-        return {
-          SkillId: skill.SkillId,
-          years_of_experience: skill.years_of_experience,
-          UserId: id,
-        }
-      })
-
-      await UserSkill.bulkCreate(skillsMap)
-    }
-
-    if (language) {
-      const language_parse = JSON.parse(language)
-      const languageMap = language_parse.map((lan) => {
-        return {
-          name: lan.name,
-          proficiency: lan.proficiency,
-          UserId: id,
-        }
-      })
-
-      await Language.bulkCreate(languageMap)
-    }
-
-    if (references) {
-      const references_parse = JSON.parse(references)
-      const referencesMap = references_parse.map((ref) => {
-        return {
-          name: ref.name,
-          email: ref.email,
-          phone: ref.phone,
-          relationship: ref.relationship,
-          UserId: id,
-        }
-      })
-
-      await Reference.bulkCreate(referencesMap)
-    }
-
-    return res.status(200).json({
-      message: 'Perfil actualizado correctamente',
+    const { code, message } = await userService.updateInfoUser(id, {
+      ...JSON.parse(user_info),
     })
+    return res.status(code).json({ message })
   } catch (error) {
+    console.log(error.message)
     return res.status(500).json({
-      message: 'Error interno en el servidor. ' + error,
+      message: 'Error interno en el servidor. Intente más tarde.',
     })
   }
 }
 
-export { update, recoveryUser, updateProfile }
+const updateUserResume = async (req, res) => {
+  try {
+    const { id } = req.params
+    const { resume } = req.files
+    const secure_url = await cloudinaryHelper.uploadPdf(
+      'resumes',
+      resume[0].buffer,
+      resume[0].originalname
+    )
+    const { code, message } = await userService.updateUserResume(secure_url, id)
+    return res.status(code).json({ message })
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error interno en el servidor. Intente más tarde.',
+    })
+  }
+}
+
+const updateUserEducation = async (req, res) => {
+  try {
+    const { id } = req.params
+    const education = req.body
+    const educationMap = education.map((edu) => {
+      return {
+        ...edu,
+        UserId: id,
+      }
+    })
+    const { code, message } = await userService.updateUserEducation(
+      id,
+      educationMap
+    )
+    return res.status(code).json({ message })
+  } catch (error) {
+    console.log(error.message)
+    return res.status(500).json({
+      message: 'Error interno en el servidor. Intente más tarde.',
+    })
+  }
+}
+
+const updateUserWorkExperience = async (req, res) => {
+  try {
+    const { id } = req.params
+    const experiences = req.body
+    const experienceMap = experiences.map((exp) => {
+      return {
+        ...exp,
+        UserId: id,
+      }
+    })
+    const { code, message } = await userService.updateUserWorkExperience(
+      id,
+      experienceMap
+    )
+    return res.status(code).json({ message })
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error interno en el servidor. Intente más tarde.',
+    })
+  }
+}
+
+const updateUserSkills = async (req, res) => {
+  try {
+    const { id } = req.params
+    const skills = req.body
+    const skillsMap = skills.map((skill) => {
+      return {
+        ...skill,
+        UserId: id,
+      }
+    })
+    const { code, message } = await userService.updateUserSkills(id, skillsMap)
+    return res.status(code).json({ message })
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error interno en el servidor. Intente más tarde.',
+    })
+  }
+}
+
+const updateUserLanguage = async (req, res) => {
+  try {
+    const { id } = req.params
+    const languages = req.body
+    const languageMap = languages.map((lang) => {
+      return {
+        ...lang,
+        UserId: id,
+      }
+    })
+    const { code, message } = await userService.updateUserLanguages(
+      id,
+      languageMap
+    )
+    return res.status(code).json({ message })
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error interno en el servidor. Intente más tarde.',
+    })
+  }
+}
+
+const updateUserReferences = async (req, res) => {
+  try {
+    const { id } = req.params
+    const references = req.body
+    const referencesMap = references.map((ref) => {
+      return {
+        ...ref,
+        UserId: id,
+      }
+    })
+    const { code, message } = await userService.updateUserReferences(
+      id,
+      referencesMap
+    )
+    return res.status(code).json({ message })
+  } catch (error) {
+    console.log(error.message)
+    return res.status(500).json({
+      message: 'Error interno en el servidor. Intente más tarde.',
+    })
+  }
+}
+
+export {
+  update,
+  recoveryUser,
+  updateUserInfo,
+  updateUserResume,
+  updateUserEducation,
+  updateUserWorkExperience,
+  updateUserSkills,
+  updateUserLanguage,
+  updateUserReferences,
+}
