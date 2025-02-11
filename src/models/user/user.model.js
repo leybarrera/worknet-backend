@@ -62,7 +62,7 @@ const UserModel = (sequelize) => {
       },
       isActive: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false,
+        defaultValue: true,
       },
       isDeleted: {
         type: DataTypes.BOOLEAN,
