@@ -35,13 +35,44 @@ const update = async (id, data) => {
       id,
     },
   })
+  if (rows > 0) {
+    const updatedCompany = await Company.findOne({
+      where: {
+        id,
+      },
+    })
+
+    return {
+      code: 200,
+      message: 'Empresa actualizada con éxito',
+      companyUpdated: updatedCompany,
+    }
+  }
+  return {
+    code: 400,
+    message: 'No se pudo actualizar la empresa. Por favor, inténtelo más tarde',
+  }
+}
+
+const updatePassword = async (id, data) => {
+  const company = await Company.findOne({
+    where: {
+      id,
+      isDeleted: false,
+    },
+  })
+
+  if (!company) return { code: 404, message: 'La empresa no fue encontrada' }
+
+  const [rows] = await Company.update(data, {
+    where: {
+      id,
+    },
+  })
+
   return rows > 0
-    ? { code: 200, message: 'Empresa actualizada con éxito' }
-    : {
-        code: 400,
-        message:
-          'No se pudo actualizar la empresa. Por favor, inténtelo más tarde',
-      }
+    ? { code: 200, message: 'Contraseña actualizada con éxito' }
+    : { code: 400, message: 'No se pudo actualizar la contraseña' }
 }
 
 const recoveryCompany = async (id) => {
@@ -59,4 +90,4 @@ const recoveryCompany = async (id) => {
   return { code: 200, message: 'La empresa fue recuperada con éxito' }
 }
 
-export { update, recoveryCompany }
+export { update, recoveryCompany, updatePassword }

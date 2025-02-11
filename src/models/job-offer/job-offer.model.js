@@ -35,6 +35,21 @@ const JobOfferModel = (sequelize) => {
         ],
       },
 
+      education_level: {
+        type: DataTypes.ENUM,
+        allowNull: false,
+        values: [
+          'Primaria',
+          'Secundaria',
+          'Técnico',
+          'Tecnológico',
+          'Universitario',
+          'Pregrado',
+          'Postgrado',
+          'Doctorado',
+        ],
+      },
+
       salary: {
         type: DataTypes.FLOAT,
         allowNull: false,
@@ -47,11 +62,6 @@ const JobOfferModel = (sequelize) => {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW, // Establece la fecha y hora actuales por defecto
-      },
-
-      ai_recommendation: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
       },
 
       CompanyId: {

@@ -20,7 +20,7 @@ const skillExists = async (id) => {
 }
 
 const register = async (data) => {
-  const { UserId, SkillId } = data
+  const { UserId, SkillId, years_of_experience } = data
 
   if (!(await userExists(UserId)))
     return { code: 400, message: 'Usuario no encontrado' }

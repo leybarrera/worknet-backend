@@ -10,7 +10,16 @@ jobApplicationRouter.get(
   jobApplicationController.getByJobOffer
 )
 jobApplicationRouter.post('/', jobApplicationController.register)
-jobApplicationRouter.delete('/:id', jobApplicationController.remove)
+jobApplicationRouter.delete('/delete-offer', jobApplicationController.remove)
+jobApplicationRouter.delete('/:id', jobApplicationController.deleteById)
 jobApplicationRouter.put('/:id', jobApplicationController.update)
+jobApplicationRouter.patch(
+  '/reject/:id',
+  jobApplicationController.rejectPostulation
+)
+jobApplicationRouter.patch(
+  '/accept/:id',
+  jobApplicationController.acceptPostulation
+)
 
 export default jobApplicationRouter

@@ -23,6 +23,17 @@ userRouter.delete('/:id', userController.remove)
 userRouter.put('/recovery/:id', userController.recoveryUser)
 
 userRouter.put(
+  '/with-image',
+  multerHelper.upload.single('profile_picture'),
+  userController.updateWithImage
+)
+userRouter.put(
+  '/without-image',
+  multerHelper.upload.none(),
+  userController.updateWihoutImage
+)
+
+userRouter.put(
   '/:id',
   multerHelper.upload.fields([{ name: 'image', maxCount: 1 }]),
   userController.updateUserInfo

@@ -3,7 +3,7 @@ import { Resume } from '../../lib/conn.js'
 const remove = async (id) => {
   const rowsDeleted = await Resume.destroy({
     where: {
-      id,
+      UserId: id,
     },
   })
 

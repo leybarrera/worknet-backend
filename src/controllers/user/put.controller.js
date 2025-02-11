@@ -11,6 +11,44 @@ import {
 } from '../../lib/conn.js'
 import { userService } from '../../services/index.services.js'
 
+const updateWihoutImage = async (req, res) => {
+  try {
+    const data = req.body
+    const { id, ...newData } = data
+    const { code, message } = await userService.update(id, newData)
+    return res.status(code).json({ message })
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: `Error interno del servidor. ${error}` })
+  }
+}
+
+const updateWithImage = async (req, res) => {
+  try {
+    const file = req.file
+    const data = req.body
+
+    const secure_url = await cloudinaryHelper.uploadFile(
+      'users',
+      file.buffer,
+      `profile_${file.originalname}`
+    )
+    const { id, ...userData } = data
+    const newUserData = {
+      ...userData,
+      profile_picture: secure_url,
+    }
+    const { code, message } = await userService.update(id, newUserData)
+    return res.status(code).json({ message })
+  } catch (error) {
+    console.log(error)
+    return res
+      .status(500)
+      .json({ message: `Error interno del servidor. ${error}` })
+  }
+}
+
 const update = async (req, res) => {
   try {
     const { id } = req.params
@@ -195,9 +233,11 @@ export {
   recoveryUser,
   updateUserInfo,
   updateUserResume,
+  updateWihoutImage,
   updateUserEducation,
   updateUserWorkExperience,
   updateUserSkills,
+  updateWithImage,
   updateUserLanguage,
   updateUserReferences,
 }

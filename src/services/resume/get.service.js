@@ -20,6 +20,7 @@ const getByUser = async (UserId) => {
       UserId,
     },
   })
+
   return resume
     ? { code: 200, resume }
     : { code: 404, message: 'Currículum no encontrado' }

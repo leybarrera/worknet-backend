@@ -6,6 +6,7 @@ const register = async (req, res) => {
     const { code, message } = await jobOfferService.register(data)
     return res.status(code).json({ message })
   } catch (error) {
+    console.log(error.message)
     return res.status(500).json({
       message: `Error interno en el servidor. ${error}`,
     })

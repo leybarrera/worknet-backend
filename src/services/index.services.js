@@ -14,7 +14,8 @@ import workExperienceService from './work-experience/index.service.js'
 import userSkillService from './user-skill/index.service.js'
 import authService from './auth/index.service.js'
 import roleService from './role/index.service.js'
-
+import educationService from './education/index.service.js'
+import referenceService from './references/index.service.js'
 export {
   certificationService,
   companyService,
@@ -32,4 +33,6 @@ export {
   userSkillService,
   roleService,
   authService,
+  educationService,
+  referenceService,
 }

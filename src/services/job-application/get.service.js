@@ -1,4 +1,12 @@
-import { JobApplication, JobOffer, User } from '../../lib/conn.js'
+import {
+  Company,
+  Education,
+  JobApplication,
+  JobOffer,
+  Skill,
+  User,
+  UserSkill,
+} from '../../lib/conn.js'
 
 const getAll = async () => {
   const jobApplications = await JobApplication.findAll({
@@ -22,7 +30,13 @@ const getByUser = async (UserId) => {
     where: {
       UserId,
     },
-    include: [User, JobOffer],
+    include: [
+      User,
+      {
+        model: JobOffer,
+        include: [Company],
+      },
+    ],
   })
 
   return jobApplications
@@ -37,7 +51,13 @@ const getByJobOffer = async (JobOfferId) => {
     where: {
       JobOfferId,
     },
-    include: [User, JobOffer],
+    include: [
+      JobOffer,
+      {
+        model: User,
+        include: [Education, Skill],
+      },
+    ],
   })
   return jobApplications
     ? { code: 200, jobApplications }

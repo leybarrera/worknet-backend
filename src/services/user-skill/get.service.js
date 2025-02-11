@@ -12,7 +12,7 @@ const getByUser = async (UserId) => {
   })
   return userSkills.length > 0
     ? { code: 200, userSkills }
-    : { code: 404, userSkills: [] }
+    : { code: 200, userSkills: [] }
 }
 const getBySkill = async (SkillId) => {
   const userSkills = await UserSkill.findAll({

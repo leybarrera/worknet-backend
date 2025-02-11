@@ -15,8 +15,9 @@ import jobOfferController from './job-offer/index.controller.js'
 import userSkillController from './user-skill/index.controller.js'
 import workExperienceController from './work-experience/index.controller.js'
 
+import educationController from './education/index.controller.js'
 import authController from './auth/index.controller.js'
-
+import referenceController from './references/index.controller.js'
 export {
   authController,
   certificactionController,
@@ -34,4 +35,6 @@ export {
   jobOfferController,
   userSkillController,
   workExperienceController,
+  educationController,
+  referenceController,
 }
