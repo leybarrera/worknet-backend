@@ -58,7 +58,7 @@ export const loaderData = async () => {
     ])
 
     await Company.create({
-      name: 'Company',
+      name: 'Company ABC',
       industry: 'Industria',
       location: 'La Maná',
       ruc: '123456789',

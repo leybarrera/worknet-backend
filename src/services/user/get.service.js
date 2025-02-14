@@ -18,6 +18,7 @@ const getAll = async () => {
       role: {
         [Op.ne]: 'Administrador', // Excluir los usuarios con rol 'Administrador'
       },
+      isDeleted: false,
     },
     include: [
       {

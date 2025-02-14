@@ -5,7 +5,6 @@ const getAll = async () => {
     where: {
       isDeleted: false,
     },
-    include: [User],
   })
   return { code: 200, companies }
 }
@@ -15,7 +14,6 @@ const getById = async (id) => {
       id,
       isDeleted: false,
     },
-    include: [User],
   })
   return company
     ? { code: 200, company }
@@ -27,7 +25,6 @@ const getByUser = async (UserId) => {
       UserId,
       isDeleted: false,
     },
-    include: [User],
   })
   return company
     ? { code: 200, company }

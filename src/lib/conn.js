@@ -25,6 +25,7 @@ const {
   Interaction,
   Language,
   Reference,
+  Code,
 } = sequelize.models
 
 User.hasMany(Certification)
@@ -78,6 +79,7 @@ Reference.belongsTo(User)
 
 export {
   sequelize,
+  Code,
   Certification,
   Company,
   Connection,

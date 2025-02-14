@@ -18,6 +18,7 @@ import workExperienceController from './work-experience/index.controller.js'
 import educationController from './education/index.controller.js'
 import authController from './auth/index.controller.js'
 import referenceController from './references/index.controller.js'
+import codeController from './code/index.controller.js'
 export {
   authController,
   certificactionController,
@@ -37,4 +38,5 @@ export {
   workExperienceController,
   educationController,
   referenceController,
+  codeController,
 }

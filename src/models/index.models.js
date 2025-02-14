@@ -16,11 +16,13 @@ import SkillModel from './skill/skill.model.js'
 import UserSkillModel from './user-skill/user-skill.model.js'
 import UserModel from './user/user.model.js'
 import WorkExperienceModel from './work-experience/work-experience.model.js'
+import CodeModel from './code/code.model.js'
 
 export const models = [
   CertificationModel,
   CompanyModel,
   ConnectionModel,
+  CodeModel,
   EducationModel,
   EvaluationModel,
   InteractionModel,

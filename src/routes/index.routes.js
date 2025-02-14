@@ -17,7 +17,7 @@ import recommerdationRouter from './recommendation/recommendation.route.js'
 import authRouter from './auth/index.route.js'
 import educationRouter from './education/educattion.router.js'
 import referenceRouter from './references/reference.route.js'
-
+import codeRouter from './code/index.route.js'
 const rootRouter = Router()
 
 rootRouter.use('/roles', roleRouter)
@@ -38,4 +38,5 @@ rootRouter.use('/recommendations', recommerdationRouter)
 rootRouter.use('/auth', authRouter)
 rootRouter.use('/educations', educationRouter)
 rootRouter.use('/references', referenceRouter)
+rootRouter.use('/codes', codeRouter)
 export default rootRouter

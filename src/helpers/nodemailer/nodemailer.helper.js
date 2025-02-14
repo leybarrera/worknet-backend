@@ -20,13 +20,12 @@ const send = (to, file, subject) => {
   })
 }
 
-const welcome = (to, name, token) => {
+const welcome = (to, name) => {
   const pathname = generatePathName('welcome')
   const file = fs
     .readFileSync(pathname, { encoding: 'utf-8' })
     .toString()
     .replace('${name}', name)
-    .replace('${token}', token)
   send(to, file, 'Worknet - Bienvenido')
 }
 
@@ -70,7 +69,18 @@ const recuperarContraseña = (to, cliente, codigo) => {
   send(to, file, 'Recuperación de contraseña')
 }
 
+const activarCuenta = (to, code) => {
+  const pathname = generatePathName('activation-account')
+  const file = fs
+    .readFileSync(pathname, { encoding: 'utf-8' })
+    .toString()
+    .replace('${code}', code)
+
+  send(to, file, 'Activación de cuenta')
+}
+
 export default {
+  activarCuenta,
   recuperarContraseña,
   welcome,
   confirmActivation,

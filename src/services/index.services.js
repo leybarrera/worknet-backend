@@ -16,6 +16,8 @@ import authService from './auth/index.service.js'
 import roleService from './role/index.service.js'
 import educationService from './education/index.service.js'
 import referenceService from './references/index.service.js'
+import codeService from './code/index.service.js'
+
 export {
   certificationService,
   companyService,
@@ -35,4 +37,5 @@ export {
   authService,
   educationService,
   referenceService,
+  codeService,
 }
